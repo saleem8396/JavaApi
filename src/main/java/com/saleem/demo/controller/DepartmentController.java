@@ -3,10 +3,7 @@ package com.saleem.demo.controller;
 import com.saleem.demo.entity.Department;
 import com.saleem.demo.services.DepartmentServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +21,9 @@ public class DepartmentController {
         return departmentServices.getlist();
     }
 
+    @GetMapping("/id={id}")
+    public Department getDepartmentById(@PathVariable("id") Long departmentId){
+
+        return departmentServices.getDepartmentById(departmentId);
+    }
 }

@@ -10,4 +10,6 @@ public interface DepartmentServices {
     public Department saveDepartment(Department department);
 
     public List<Department> getlist();
+
+    public Department getDepartmentById(Long departmentId);
 }
