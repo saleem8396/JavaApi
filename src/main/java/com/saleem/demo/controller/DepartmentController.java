@@ -2,6 +2,7 @@ package com.saleem.demo.controller;
 
 import com.saleem.demo.entity.Department;
 import com.saleem.demo.services.DepartmentServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class DepartmentController {
     private DepartmentServices departmentServices;
 
     @PostMapping("/departments")
-    public Department save(@RequestBody Department department){
+    public Department save(@Valid @RequestBody Department department){
         return departmentServices.saveDepartment(department);
     }
     @GetMapping("/getdepartments")
