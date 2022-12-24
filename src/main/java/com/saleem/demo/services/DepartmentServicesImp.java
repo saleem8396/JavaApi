@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DepartmentServicesImp implements DepartmentServices{
@@ -31,5 +32,29 @@ public class DepartmentServicesImp implements DepartmentServices{
     @Override
     public void deleteById(Long departmentId) {
         departmentRepository.deleteById(departmentId);
+    }
+
+    @Override
+    public Department updateDepartment(Long departmentId, Department department) {
+        Department department1=departmentRepository.findById(departmentId).get();
+
+        if (Objects.nonNull(department.getDepartmentAddress()) && !"".equalsIgnoreCase(department.getDepartmentAddress())){
+
+            department1.setDepartmentAddress(department.getDepartmentAddress());
+        }
+        if (Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode())){
+
+            department1.setDepartmentCode(department.getDepartmentCode());
+        }
+        if (Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())){
+
+            department1.setDepartmentName(department.getDepartmentName());
+        }
+        return departmentRepository.save(department1);
+    }
+
+    @Override
+    public List<Department> fetchDepartmentByName(String departmentName) {
+        return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
     }
 }
