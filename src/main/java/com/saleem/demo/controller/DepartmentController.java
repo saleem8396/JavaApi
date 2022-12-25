@@ -1,6 +1,7 @@
 package com.saleem.demo.controller;
 
 import com.saleem.demo.entity.Department;
+import com.saleem.demo.error.DepartmentNotFoundException;
 import com.saleem.demo.services.DepartmentServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class DepartmentController {
     }
     @GetMapping("/getdepartments")
     public List<Department> getlist(){
-        return departmentServices.getlist();
+        return departmentServices.getList();
     }
 
     @GetMapping("/id={id}")
-    public Department getDepartmentById(@PathVariable("id") Long departmentId){
+    public Department getDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
 
         return departmentServices.getDepartmentById(departmentId);
     }

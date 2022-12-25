@@ -1,6 +1,7 @@
 package com.saleem.demo.services;
 
 import com.saleem.demo.entity.Department;
+import com.saleem.demo.error.DepartmentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.List;
 public interface DepartmentServices {
     public Department saveDepartment(Department department);
 
-    public List<Department> getlist();
+    public List<Department> getList();
 
-    public Department getDepartmentById(Long departmentId);
+    public Department getDepartmentById(Long departmentId) throws DepartmentNotFoundException;
 
    public void deleteById(Long departmentId);
 
