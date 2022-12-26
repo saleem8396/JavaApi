@@ -61,7 +61,7 @@ public class DepartmentServicesImp implements DepartmentServices{
     }
 
     @Override
-    public List<Department> fetchDepartmentByName(String departmentName) {
+    public Department fetchDepartmentByName(String departmentName) {
         return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
     }
 }
