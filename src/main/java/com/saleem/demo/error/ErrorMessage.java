@@ -11,5 +11,5 @@ import org.springframework.stereotype.Component;
 public class ErrorMessage {
 
     private HttpStatus httpStatus;
-    private String message;
+    private String Message;
 }
