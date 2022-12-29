@@ -19,9 +19,6 @@ class DepartmentServicesTest {
 
     @BeforeEach
     void setUp() {
-//        Optional<Department> department= Optional.ofNullable(Department.builder().departmentId(1L).departmentAddress("madurai").departmentCode("IT-07").departmentName("it").build());
-//
-//        Mockito.when(departmentRepository.findById(1L)).thenReturn(department);
 
         Department department =Department.builder()
                 .departmentName("it")
@@ -37,8 +34,8 @@ class DepartmentServicesTest {
     public void whenValidDepartmentName_thenDepartmentShouldBeFound( )  {
 
         String departmentName ="it";
-        Department department= departmentServices.fetchDepartmentByName(departmentName);
-        assertEquals(departmentName,department.getDepartmentName());
+        Department found= departmentServices.fetchDepartmentByName(departmentName);
+        assertEquals(departmentName,found.getDepartmentName());
     }
 
 }
