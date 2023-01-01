@@ -1,8 +1,10 @@
 package com.saleem.demo.controller;
 
 import com.saleem.demo.entity.Department;
+import com.saleem.demo.error.DepartmentNotFoundException;
 import com.saleem.demo.services.DepartmentServices;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 class DepartmentControllerTest {
@@ -47,26 +51,31 @@ class DepartmentControllerTest {
 
         Mockito.when(departmentServices.saveDepartment(inputDepartment)).thenReturn(department);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/departments").contentType(MediaType.APPLICATION_JSON).content("{\n" +
+        mockMvc.perform(post("/departments").contentType(MediaType.APPLICATION_JSON).content("{\n" +
                 "    \"departmentName\":\"mechanical\",\n" +
                 "    \"departmentAddress\":\"madurai\",\n" +
                 "    \"departmentCode\":\"008\"\n" +
                 "   \n" +
-                "}")).andExpect(MockMvcResultMatchers.status().isOk());
+                "}")).andExpect(status().isOk());
 
     }
 
     @Test
-    void fetchDepartmentByName() throws Exception {
+    @DisplayName("fecting data using departmentName")
+    void fetchDepartmentByName() throws Exception , DepartmentNotFoundException {
 //        Department inputDepartment =Department.builder()
 //                .departmentName("mechanical")
 //                .departmentCode("008")
 //                .departmentAddress("madurai")
 //                .build();
 
-        Mockito.when(departmentServices.fetchDepartmentByName("mechamical")).thenReturn(department);
+        Mockito.when(departmentServices.fetchDepartmentByName("mechanical"))
+                .thenReturn(department);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/departmentName=mechanical")).andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(get("/departmentName=mechanical").contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk())
+                        .andExpect(jsonPath("$.departmentName")
+                                .value(department.getDepartmentName()));
 
     }
 }

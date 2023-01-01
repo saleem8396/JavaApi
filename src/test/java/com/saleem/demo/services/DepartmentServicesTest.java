@@ -1,6 +1,7 @@
 package com.saleem.demo.services;
 
 import com.saleem.demo.entity.Department;
+import com.saleem.demo.error.DepartmentNotFoundException;
 import com.saleem.demo.repository.DepartmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class DepartmentServicesTest {
     }
 
     @Test
-    public void whenValidDepartmentName_thenDepartmentShouldBeFound( )  {
+    public void whenValidDepartmentName_thenDepartmentShouldBeFound( ) throws DepartmentNotFoundException {
 
         String departmentName ="it";
         Department found= departmentServices.fetchDepartmentByName(departmentName);

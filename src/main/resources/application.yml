@@ -1,0 +1,23 @@
+welcome:
+  message: hello welcome
+server:
+  port: '9090'
+
+---
+spring:
+
+  datasource:
+    username: saleem8396
+    url: jdbc:mysql://localhost:3306/saleem8396_spring_api
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: saleem8396@098
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+management:
+  endpoints:
+    web:
+     exposure:
+       include: "*"

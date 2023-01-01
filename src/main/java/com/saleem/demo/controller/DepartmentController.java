@@ -40,7 +40,7 @@ public class DepartmentController {
         return departmentServices.updateDepartment(departmentId,department);
     }
     @GetMapping("/departmentName={name}")
-    public Department fetchDepartmentByName(@PathVariable("name") String departmentName){
+    public Department fetchDepartmentByName(@PathVariable("name") String departmentName) throws DepartmentNotFoundException {
        return departmentServices.fetchDepartmentByName(departmentName);
     }
 }

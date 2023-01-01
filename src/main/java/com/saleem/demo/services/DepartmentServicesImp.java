@@ -61,7 +61,11 @@ public class DepartmentServicesImp implements DepartmentServices{
     }
 
     @Override
-    public Department fetchDepartmentByName(String departmentName) {
-        return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
+    public Department fetchDepartmentByName(String departmentName) throws DepartmentNotFoundException {
+        Department department= departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
+        if (department==null){
+            throw new DepartmentNotFoundException(" No such department");
+        }
+        return department;
     }
 }
